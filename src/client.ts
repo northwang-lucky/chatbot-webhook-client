@@ -1,9 +1,9 @@
 import { getInput } from '@actions/core';
 import { createHmac } from 'crypto';
 import { stringify } from 'querystring';
-import request from 'request';
 import { URL_REGEX } from './constants';
 import { ActionOptions, App, Body, Options, Response } from './types';
+import request from 'request';
 
 export class Client {
   app: App;
@@ -42,8 +42,8 @@ export class Client {
     let payload: Body = {};
     try {
       payload = JSON.parse(params);
-    } catch (err) {
-      throw new Error('Parameter params must be a JSON string');
+    } catch (err: any) {
+      throw new Error('Parameter params must be a JSON string. Error: ' + err.message);
     }
     return { app, webhook, secret, payload };
   }
