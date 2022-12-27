@@ -24,6 +24,7 @@ steps:
       # Optional - Used for sign
       secret: xxxx
       # Required - POST request body (JSON format)
+      # If there are some double quotes '"' in your json body, please use '\"'
       params: >-
         {
           "msgtype": "text",
