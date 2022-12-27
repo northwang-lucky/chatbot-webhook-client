@@ -24,7 +24,7 @@ steps:
       # Optional - Used for sign
       secret: xxxx
       # Required - POST request body (JSON format)
-      payload: >-
+      params: >-
         {
           "msgtype": "text",
           "text": { "content": "This is a test message." }

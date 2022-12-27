@@ -16,7 +16,7 @@ inputs:
   secret:
     description: Used for sign
     required: false
-  payload:
+  params:
     description: >-
       POST request body (JSON format). 
       More usage to see https://open.dingtalk.com/document/group/custom-robot-access or 
