@@ -1,0 +1,29 @@
+name: DingTalk, Lark, WeCom Custom BOT Webhook Caller
+description: Webhook calls of custom BOT that support DingTalk, Lark and WeCom
+author: northwang
+
+branding:
+  icon: send
+  color: blue
+
+inputs:
+  app:
+    description: DingTalk/Lark/WeCom
+    required: true
+  webhook:
+    description: Custom BOT webhook URL
+    required: true
+  secret:
+    description: Used for sign
+    required: false
+  payload:
+    description: >-
+      POST request body (JSON format). 
+      More usage to see https://open.dingtalk.com/document/group/custom-robot-access or 
+      https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN or 
+      https://developer.work.weixin.qq.com/document/path/91770
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
