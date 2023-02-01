@@ -1,6 +1,6 @@
 {
   "name": "chatbot-webhook-client",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Webhook calls of custom BOT that support DingTalk, Lark and WeCom",
   "main": "lib/main.js",
   "author": "northwang <69568203+northwang-lucky@users.noreply.github.com>",
@@ -10,7 +10,8 @@
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "package": "ncc build --source-map --license licenses.txt",
-    "all": "rimraf ./dist && yarn build && yarn format && yarn package"
+    "all": "rimraf ./dist && yarn build && yarn format && yarn package",
+    "release": "standard-version && git push --follow-tags"
   },
   "repository": {
     "type": "git",
