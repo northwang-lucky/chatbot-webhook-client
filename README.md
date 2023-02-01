@@ -12,7 +12,7 @@ Webhook calls of custom BOT that support DingTalk, Lark and WeCom.
 
 ## Action Usage
 
-Usage of **v1.0.2** and later
+Usage of **v1.1.0** and later
 
 ```yaml
 steps:
@@ -46,7 +46,7 @@ steps:
       branch: main
 ```
 
-Usage before v1.0.2
+Usage before v1.1.0
 
 ```yaml
 steps:
