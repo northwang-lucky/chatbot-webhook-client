@@ -10,7 +10,10 @@ export interface ActionOptions {
   app: App;
   webhook: string;
   secret?: string;
-  params: string;
+  template: string;
+  params?: string;
+  githubToken?: string;
+  branch?: string;
 }
 
 export interface Options {

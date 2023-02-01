@@ -1,4 +1,5 @@
 import { getInput } from '@actions/core';
+import { context, getOctokit } from '@actions/github';
 import { createHmac } from 'crypto';
 import { stringify } from 'querystring';
 import { URL_REGEX } from './constants';
@@ -14,24 +15,52 @@ export class Client {
 
   payload: Body;
 
-  constructor() {
-    const { app, webhook, secret = '', payload } = this.verify(this.getActionOptions());
+  constructor(app: App, webhook: string, secret: string, payload: Body) {
     this.app = app;
     this.webhook = webhook;
     this.secret = secret;
     this.payload = payload;
   }
 
-  private getActionOptions(): ActionOptions {
-    return {
-      app: getInput('app', { required: true }) as App,
-      webhook: getInput('webhook', { required: true }),
-      secret: getInput('secret', { required: false }),
-      params: getInput('params', { required: true }),
-    };
+  public static async init() {
+    const { app, webhook, secret = '', payload } = await this.verify(this.getActionOptions());
+    return new Client(app, webhook, secret, payload);
   }
 
-  private verify({ app, webhook, secret, params }: ActionOptions): Options {
+  private static getActionOptions(): ActionOptions {
+    const app = getInput('app', { required: true }) as App;
+    const webhook = getInput('webhook', { required: true });
+    const secret = getInput('secret', { required: false });
+    const template = getInput('template', { required: true });
+    const params = getInput('params', { required: false });
+    const githubToken = getInput('github-token', { required: false });
+    const branch = getInput('branch', { required: false });
+    return { app, webhook, secret, template, params, githubToken, branch };
+  }
+
+  private static async getTemplateByFileURI(fileURI: string, githubToken: string, branch: string): Promise<string> {
+    const octokit = getOctokit(githubToken);
+    const templatePath = fileURI.replace(/^file:\/\//, '');
+    const { owner, repo } = context.repo;
+
+    try {
+      const response = await octokit.rest.repos.getContent({ owner, repo, path: templatePath, ref: branch });
+      const data = response.data as { content: string };
+      return Buffer.from(data.content, 'base64').toString('utf-8');
+    } catch (err: unknown) {
+      throw err instanceof Error ? err : new Error('Something is wrong when getting file content from repository');
+    }
+  }
+
+  private static async verify({
+    app,
+    webhook,
+    secret,
+    template,
+    params,
+    githubToken,
+    branch = 'main',
+  }: ActionOptions): Promise<Options> {
     const appNames = Object.values(App);
     if (!Object.values(App).includes(app)) {
       throw new Error(`Parameter app must be one of "${appNames.join(', ')}"`);
@@ -39,11 +68,23 @@ export class Client {
     if (!URL_REGEX.test(webhook)) {
       throw new Error('Parameter webhook must be a URL');
     }
+
+    const templateIsFileURI = (template ?? '').startsWith('file://');
+    if (templateIsFileURI && (!params || !githubToken)) {
+      throw new Error('Parameter params and parameter githubToken is required when template is a file URI');
+    }
+
     let payload: Body = {};
+    // template maybe a json object or a file URI
+    if (templateIsFileURI && params && githubToken) {
+      template = await this.getTemplateByFileURI(template, githubToken, branch);
+      template = template.replace(/\$\{(.*?)\}/g, (_, f) => `\${params.${f}}`);
+      template = new Function('params', `return \`${template}\``)(params);
+    }
     try {
-      payload = JSON.parse(params);
+      payload = JSON.parse(template);
     } catch (err: any) {
-      throw new Error('Parameter params must be a JSON string. Error: ' + err.message);
+      throw new Error('Parameter payload must be a JSON string. Error: ' + err.message);
     }
     return { app, webhook, secret, payload };
   }

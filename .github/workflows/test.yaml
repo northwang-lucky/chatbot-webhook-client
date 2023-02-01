@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      header_color:
+        description: Header color
+        required: true
+        type: string
+      header_title:
+        description: Header title
+        required: true
+        type: string
+
+jobs:
+  test-notify:
+    runs-on: ubuntu-latest
+    name: Test Notify
+    steps:
+      - name: Notify
+        uses: northwang-personal/chatbot-webhook-client@v1.0.2
+        with:
+          app: Lark
+          webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
+          secret: ${{ secrets.CUSTOM_BOT_SECRET }}
+          template: file://.template/message.json
+          params: >-
+            {
+              "header_color": "${{ inputs.header_color }}",
+              "header_title": "${{ inputs.header_title }}",
+              "repository": "${{ github.repository }}",
+              "workflow_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }

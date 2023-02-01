@@ -1,9 +1,9 @@
 {
   "name": "chatbot-webhook-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Webhook calls of custom BOT that support DingTalk, Lark and WeCom",
   "main": "lib/main.js",
-  "author": "northwang <69568203+wyb199877@users.noreply.github.com>",
+  "author": "northwang <69568203+northwang-lucky@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "@actions/core": "1.10.0",
+    "@actions/github": "5.1.1",
     "crypto": "1.0.1",
     "request": "2.88.2"
   },
@@ -35,6 +36,7 @@
     "@vercel/ncc": "0.31.1",
     "js-yaml": "4.1.0",
     "prettier": "2.5.1",
+    "standard-version": "9.5.0",
     "typescript": "4.4.4"
   }
 }

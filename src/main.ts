@@ -3,7 +3,7 @@ import { Client } from './client';
 
 (async function (): Promise<void> {
   try {
-    const client = new Client();
+    const client = await Client.init();
     setOutput('response', await client.notify());
   } catch (err: any) {
     if (typeof err === 'string') {

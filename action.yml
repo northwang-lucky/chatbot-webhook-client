@@ -16,13 +16,24 @@ inputs:
   secret:
     description: Used for sign
     required: false
-  params:
+  template:
     description: >-
-      POST request body (JSON format). 
+      POST request body (JSON format) or a file URI (file://README.md)
       More usage to see https://open.dingtalk.com/document/group/custom-robot-access or 
       https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN or 
       https://developer.work.weixin.qq.com/document/path/91770
     required: true
+  params:
+    description: Parameters for file template (JSON format)
+    required: false
+  github-token:
+    description: >-
+      Workflow will generate a GITHUB_TOKEN in secrets automatically, 
+      you can direct use "${{ secrets.GITHUB_TOKEN }}"
+    required: false
+  branch:
+    description: The branch where the file resides
+    required: false
 
 runs:
   using: 'node16'
