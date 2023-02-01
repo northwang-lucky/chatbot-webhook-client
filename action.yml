@@ -29,7 +29,7 @@ inputs:
   github-token:
     description: >-
       Workflow will generate a GITHUB_TOKEN in secrets automatically, 
-      you can direct use "${{ secrets.GITHUB_TOKEN }}"
+      you can direct use "secrets.GITHUB_TOKEN"
     required: false
   branch:
     description: The branch where the file resides

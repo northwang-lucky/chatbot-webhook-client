@@ -31,3 +31,4 @@ jobs:
               "repository": "${{ github.repository }}",
               "workflow_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
+          github-token: ${{ secrets.GITHUB_TOKEN }}
