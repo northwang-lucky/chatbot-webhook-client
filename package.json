@@ -6,12 +6,14 @@
   "author": "northwang <69568203+northwang-lucky@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --noEmit",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "package": "ncc build --source-map --license licenses.txt",
-    "all": "rimraf ./dist && yarn build && yarn format && yarn package",
-    "release": "standard-version && git push --follow-tags"
+    "build": "rimraf ./dist && tsc --noEmit && yarn format && yarn package",
+    "release:major": "standard-version --release-as major",
+    "release:minor": "standard-version --release-as minor",
+    "release:patch": "standard-version --release-as patch",
+    "push-with-tags": "git push --follow-tags"
   },
   "repository": {
     "type": "git",
