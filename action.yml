@@ -27,7 +27,9 @@ inputs:
     description: Parameters for file template (JSON format)
     required: false
   github-token:
-    description: Workflow will generate a github token automatically
+    description: >-
+      Workflow will generate a GITHUB_TOKEN in secrets automatically, 
+      you can direct use "secrets.GITHUB_TOKEN"
     required: false
   branch:
     description: The branch where the file resides
