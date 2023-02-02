@@ -77,14 +77,16 @@ export class Client {
     let payload: Body = {};
     // template maybe a json object or a file URI
     if (templateIsFileURI && params && githubToken) {
+      const paramDict = JSON.parse(params);
       template = await this.getTemplateByFileURI(template, githubToken, branch);
       template = template.replace(/\$\{(.*?)\}/g, (_, f) => `\${params.${f}}`);
-      template = new Function('params', `return \`${template}\``)(params);
+      template = new Function('params', `return \`${template}\``)(paramDict);
     }
+
     try {
       payload = JSON.parse(template);
     } catch (err: any) {
-      throw new Error('Parameter payload must be a JSON string. Error: ' + err.message);
+      throw new Error('Parameter template must be a JSON object or a file URI. JSON parse error: ' + err.message);
     }
     return { app, webhook, secret, payload };
   }
