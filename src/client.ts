@@ -62,7 +62,7 @@ export class Client {
     branch = 'main',
   }: ActionOptions): Promise<Options> {
     const appNames = Object.values(App);
-    if (!Object.values(App).includes(app)) {
+    if (!appNames.includes(app)) {
       throw new Error(`Parameter app must be one of "${appNames.join(', ')}"`);
     }
     if (!URL_REGEX.test(webhook)) {

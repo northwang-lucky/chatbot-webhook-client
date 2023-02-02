@@ -68,7 +68,7 @@ class Client {
     static verify({ app, webhook, secret, template, params, githubToken, branch = 'main', }) {
         return __awaiter(this, void 0, void 0, function* () {
             const appNames = Object.values(types_1.App);
-            if (!Object.values(types_1.App).includes(app)) {
+            if (!appNames.includes(app)) {
                 throw new Error(`Parameter app must be one of "${appNames.join(', ')}"`);
             }
             if (!constants_1.URL_REGEX.test(webhook)) {
