@@ -1,0 +1,14 @@
+{
+  "types": [
+    {
+      "type": "feat",
+      "section": "Feature",
+      "hidden": false
+    },
+    {
+      "type": "fix",
+      "section": "Bug Fix",
+      "hidden": false
+    }
+  ]
+}
