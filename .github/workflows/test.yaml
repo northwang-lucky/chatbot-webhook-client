@@ -29,6 +29,7 @@ jobs:
               "header_color": "${{ inputs.header_color }}",
               "header_title": "${{ inputs.header_title }}",
               "repository": "${{ github.repository }}",
+              "workflow": "${{ github.workflow }}",
               "workflow_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
           github-token: ${{ secrets.GITHUB_TOKEN }}
