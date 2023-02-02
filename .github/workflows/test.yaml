@@ -18,7 +18,7 @@ jobs:
     name: Test Notify
     steps:
       - name: Notify
-        uses: northwang-personal/chatbot-webhook-client@v1.1.0-alpha.0
+        uses: northwang-personal/chatbot-webhook-client@v1.1.0-alpha.1
         with:
           app: Lark
           webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
@@ -32,3 +32,4 @@ jobs:
               "workflow_url": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master
