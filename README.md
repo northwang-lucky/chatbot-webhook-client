@@ -33,6 +33,8 @@ steps:
           "text": { "content": "This is a test message." }
         }
       # Or a JSON file URI (Relative to the repository root)
+      # Also, if there are special characters like '\n', '\r', '\t', '\f' in the JSON string, write it like this: '\\n'
+      # eg: https://github.com/northwang-personal/chatbot-webhook-client/blob/master/.template/message.json
       template: file://.template/message.json
       # Required if template is a file URI - Parameters for file template (JSON format string)
       params: >-
