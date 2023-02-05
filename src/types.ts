@@ -19,7 +19,7 @@ export interface ActionOptions {
 export interface Options {
   app: App;
   webhook: string;
-  secret?: string;
+  secret: string;
   payload: Body;
 }
 

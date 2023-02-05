@@ -23,18 +23,18 @@ export class Client {
   }
 
   public static async init() {
-    const { app, webhook, secret = '', payload } = await this.verify(this.getActionOptions());
+    const { app, webhook, secret, payload } = await this.verify(this.getActionOptions());
     return new Client(app, webhook, secret, payload);
   }
 
   private static getActionOptions(): ActionOptions {
     const app = getInput('app', { required: true }) as App;
     const webhook = getInput('webhook', { required: true });
-    const secret = getInput('secret', { required: false });
+    const secret = getInput('secret', { required: false }) || undefined;
     const template = getInput('template', { required: true });
-    const params = getInput('params', { required: false });
-    const githubToken = getInput('github-token', { required: false });
-    const branch = getInput('branch', { required: false });
+    const params = getInput('params', { required: false }) || undefined;
+    const githubToken = getInput('github-token', { required: false }) || undefined;
+    const branch = getInput('branch', { required: false }) || undefined;
     return { app, webhook, secret, template, params, githubToken, branch };
   }
 
@@ -55,7 +55,7 @@ export class Client {
   private static async verify({
     app,
     webhook,
-    secret,
+    secret = '',
     template,
     params,
     githubToken,
