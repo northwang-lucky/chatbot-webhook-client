@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/northwang-personal/chatbot-webhook-client/compare/v1.1.0...v1.1.1) (2023-02-05)
+
+
+### Bug Fix
+
+* fixed an invalid default value for branch ([c07c190](https://github.com/northwang-personal/chatbot-webhook-client/commit/c07c19005455654acacce24979d00bec23de9fc2))
+
 ## [1.1.0](https://github.com/northwang-personal/chatbot-webhook-client/compare/v1.1.0-alpha.1...v1.1.0) (2023-02-02)
 
 ### Feature
