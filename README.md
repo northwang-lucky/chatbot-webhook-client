@@ -54,7 +54,7 @@ Usage before v1.1.0
 ```yaml
 steps:
   - name: Send Notification
-    uses: northwang-personal/chatbot-webhook-client@latest
+    uses: northwang-personal/chatbot-webhook-client@v1.0.1
     with:
       # Required - DingTalk/Lark/WeCom
       app: DingTalk
