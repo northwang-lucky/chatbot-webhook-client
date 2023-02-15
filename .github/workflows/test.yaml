@@ -18,7 +18,7 @@ jobs:
     name: Test Notify
     steps:
       - name: Notify
-        uses: northwang-personal/chatbot-webhook-client@v1.1.1
+        uses: northwang-lucky/chatbot-webhook-client@v1.1.1
         with:
           app: Lark
           webhook: ${{ secrets.CUSTOM_BOT_WEBHOOK }}
